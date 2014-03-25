@@ -31,8 +31,10 @@ blog.postApp = function(){
     if (Session.get('userBlog') === '') {
       document.body.appendChild(Meteor.render(Template.userBlog));
     }
+    var appUrl = 'http://' + appName + '.meteor.com';
+    blog.addMessage("Your app has been sucessfully uploaded to " + appUrl);
     Meteor.setTimeout(function(){
-      Session.set('userBlog', 'http://' + appName + '.meteor.com');
+      Session.set('userBlog', appUrl);
     }, 1000);
     
   });
