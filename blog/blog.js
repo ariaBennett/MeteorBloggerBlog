@@ -11,6 +11,7 @@ if (Meteor.isClient) {
     var setupSessions = function() {
       Session.setDefault('log', []);
       Session.setDefault('appName', "");
+      Session.setDefault('userBlog', "");
     };
     var createShell = function(target) {
       blog.bashInstructions = CodeMirror(target, {

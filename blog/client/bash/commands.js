@@ -24,8 +24,8 @@ blog.command.mkdir = function(dirName) {
 }
 
 blog.command.touch = function(fileName) {
-  if (currentDirectory[fileName] === undefined) {
-    currentDirectory[fileName] = '';
+  if (blog.currentDirectory[fileName] === undefined) {
+    blog.currentDirectory[fileName] = '';
   }
   else {
     blog.showError("A file/directory with the name " + fileName + " already exists!");
@@ -85,6 +85,7 @@ blog.command.help = function() {
     "\n          ls                       : Displays the contents of the current directory." +
     "\n          cd                       : Change current directory to specified directory. (use '..' for parent directory)" +
     "\n          pwd                      : Displays the current path." +
+    "\n          touch (file_name)        : Creates an empty file in the current directory." +
     "\n          mkdir (directory_name)   : Creates a new directory in the current directory." +
     "\n   Meteor:" +
     "\n          meteor create (app_name) : Creates a new meteor app in the root directory."

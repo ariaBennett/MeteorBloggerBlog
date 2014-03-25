@@ -8,6 +8,7 @@ blog.routeCommand = function(command, params) {
     cd: blog.command.cd,
     pwd: blog.command.pwd,
     edit: blog.command.edit,
+    touch: blog.command.touch,
     help: blog.command.help,
     '?': blog.command.help,
     meteor: blog.meteor.routeCommand
@@ -20,6 +21,18 @@ blog.routeCommand = function(command, params) {
   else {
     blog.addMessage("ERROR: Command not recognized.");
   }
+};
+
+blog.postApp = function(){
+  var dest = blog.backendUrl + 'deploy';
+  var appName = Session.get('appName');
+  var appObj = blog.userFiles['/'][appName];
+  HTTP.post(dest, {data: appObj}, function(data){
+    if (Session.get('userBlog')) {
+    }
+    Session.set('userBlog', data);
+    document.body.appendChild(Meteor.render(Template.userBlog));
+  });
 };
 
 blog.createFile = function(directory, fileName, contents) {
