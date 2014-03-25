@@ -50,6 +50,7 @@ if (Meteor.isClient) {
 
         //blog.parseCommand(lastCommand);
         blog.convertMessages(log, blog.bashInstructions);
+        blog.bashInstructions.setCursor(blog.bashInstructions.lineCount());
       });
     }
     setupSessions();
@@ -58,4 +59,5 @@ if (Meteor.isClient) {
 
   // Run startup sequence
   Meteor.startup(generalInit);
+  Meteor.startup(blog.command.help);
 }

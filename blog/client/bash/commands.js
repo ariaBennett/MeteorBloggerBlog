@@ -111,12 +111,16 @@ blog.command.help = function() {
     "\nAvailable Commands: " +
     "\n  General:" +
     "\n          ls                       : Displays the contents of the current directory." +
-    "\n          cd                       : Change current directory to specified directory. (use '..' for parent directory)" +
-    "\n          pwd                      : Displays the current path." +
+    "\n          cd (directory_name)      : Change current directory to specified directory. (use '..' for parent directory)" +
+    "\n          pwd                      : Prints the current path." +
+    "\n          echo (text)              : Repeats recieved text in the console." +
+    "\n          edit (file_name)         : Opens a text editor on the page for the specified file." +
     "\n          touch (file_name)        : Creates an empty file in the current directory." +
     "\n          mkdir (directory_name)   : Creates a new directory in the current directory." +
+    "\n          help (or ?)              : Displays this prompt." +
     "\n   Meteor:" +
-    "\n          meteor create (app_name) : Creates a new meteor app in the root directory."
+    "\n          meteor create (app_name) : Creates a new meteor app in the root directory."+
+    "\n                     meteor deploy : Hosts your meteor project on a server, then adds it to the page"
 
   );
 }
