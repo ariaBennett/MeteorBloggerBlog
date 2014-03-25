@@ -39,7 +39,7 @@ blog.meteor.deploy = function() {
   var appName = Session.get('appName');
   if (appName !== "") {
     blog.postApp();
-    blog.addMessage("Deploying you app, this can take up to ~30 seconds.");
+    blog.addMessage("Deploying your app, this can take up to ~30 seconds.");
     blog.addMessage("Your app will display below when it is loaded.");
   }
   else {
