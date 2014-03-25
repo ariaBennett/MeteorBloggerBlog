@@ -38,7 +38,7 @@ if (Meteor.isClient) {
       blog.bashInstructions.getWrapperElement().onclick = function(){
         blog.bashInput.focus();
       };
-      blog.bashInstructions.setSize("100%", "5%");
+      blog.bashInstructions.setSize("100%", "260px");
       blog.bashInput.setSize("100%", "5%");
 
       // Setup Deps events

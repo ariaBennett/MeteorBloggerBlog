@@ -57,11 +57,13 @@ blog.createDirectory = function(directory, directoryName){
 
 blog.showError = function (message){
   blog.addMessage("ERROR:  " + message);
+  blog.bashInstructions.setCursor(blog.bashInstructions.lineCount());
 };
 
 
 blog.addMessage = function(message) {
   Session.push('log', message);
+  blog.bashInstructions.setCursor(blog.bashInstructions.lineCount());
 };
 
 blog.setAppName = function(name) {
