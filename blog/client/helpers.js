@@ -26,7 +26,7 @@ blog.routeCommand = function(command, params) {
 blog.postApp = function(){
   var dest = blog.backendUrl + 'deploy';
   var appName = Session.get('appName');
-  var appObj = blog.userFiles['/'][appName];
+  var appObj = blog.userFiles['/'];
   HTTP.post(dest, {data: appObj}, function(data){
     if (Session.get('userBlog') === '') {
       document.body.appendChild(Meteor.render(Template.userBlog));
