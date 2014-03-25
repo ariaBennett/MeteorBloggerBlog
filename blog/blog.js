@@ -13,6 +13,7 @@ if (Meteor.isClient) {
       Session.setDefault('appName', "");
       Session.setDefault('userBlog', "");
       Session.setDefault('userBlogStyle', "");
+      Session.setDefault('textBuffers', {});
     };
     var createShell = function(target) {
       blog.bashInstructions = CodeMirror(target, {
@@ -34,6 +35,9 @@ if (Meteor.isClient) {
       });
 
       // Style the shells
+      blog.bashInstructions.getWrapperElement().onclick = function(){
+        blog.bashInput.focus();
+      };
       blog.bashInstructions.setSize("100%", "5%");
       blog.bashInput.setSize("100%", "5%");
 

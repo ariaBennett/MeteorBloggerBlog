@@ -1,7 +1,35 @@
 blog.command.edit = function(fileName) {
   var currentDirectory = blog.currentDirectory;
   if (typeof(currentDirectory[fileName]) === 'string') {
-    blog.addMessage("Edit is not implemented yet.");
+    var filePath = currentDirectory['.'] + fileName;
+    var textBuffers = Session.get('textBuffers');
+    if (textBuffers[filePath] === undefined) {
+      var bufferEditor = CodeMirror(document.getElementById('console'), {
+        value: currentDirectory[fileName],
+        mode: "javascript",
+        theme: "blackboard",
+        autofocus: true,
+        extraKeys: {
+          "Esc": function() {
+            currentDirectory[fileName] = bufferEditor.getValue();
+            var tb = Session.get('textBuffers');
+            tb[filePath] = undefined;
+            Session.set('textBuffers', tb);
+            bufferEditor.getWrapperElement().remove();
+            blog.addMessage("Finished editing " + fileName + ", data saved.");
+          }
+        }
+      });
+      bufferEditor.getWrapperElement().style.float = "left";
+      bufferEditor.setSize(1/3 * 100 + "%", "49%");
+      textBuffers[filePath] = true;
+      Session.set('textBuffers', textBuffers);
+      blog.addMessage("Now editing " + fileName + ".");
+      blog.addMessage("To finish editing, press the ESC key.  Changes are saved on file close automatically.");
+    } else {
+      blog.showError("Requested file is already being edited.");
+    }
+    
   } else {
     blog.showError("File name not recognized, or it is a directory.");
   }
