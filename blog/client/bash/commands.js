@@ -1,3 +1,3 @@
-Meteor.startup(
-
-);
+Meteor.startup(function(){
+  
+});
