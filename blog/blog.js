@@ -12,17 +12,16 @@ if (Meteor.isClient) {
       Session.setDefault('log', []);
       Session.setDefault('appName', "");
       Session.setDefault('userBlog', "");
+      Session.setDefault('userBlogStyle', "");
     };
     var createShell = function(target) {
       blog.bashInstructions = CodeMirror(target, {
-        //value: "sudo curl https://install.meteor.com | /bin/sh",
         value: "test",
         mode:  "shell",
         theme: "3024-night",
         readOnly: "nocursor"
       });
       blog.bashInput = CodeMirror(target, {
-        //value: "sudo curl https://install.meteor.com | /bin/sh",
         mode:  "shell",
         theme: "3024-night",
         autofocus: true, 
@@ -50,7 +49,7 @@ if (Meteor.isClient) {
       });
     }
     setupSessions();
-    createShell(document.body);
+    createShell(document.getElementById('console'));
   };
 
   // Run startup sequence

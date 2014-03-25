@@ -1,3 +1,23 @@
+blog.meteor.routeCommand = function(commandArgs) {
+  commandArgs = blog.parseCommand(commandArgs);
+  var command = commandArgs[0];
+  var args = commandArgs[1] || '';
+
+  var commandMapping = {
+    create: blog.meteor.create,
+    deploy: blog.meteor.deploy
+  };
+
+  var mappedCommand = commandMapping[command] || null;
+
+  if (mappedCommand !== null) {
+    return mappedCommand.call(null, args);
+  }
+  else {
+    blog.addMessage("ERROR: Command not recognized.");
+  }
+};
+
 blog.meteor.create = function(name) {
   name = name.replace(/\W+/g, "_");
   var sessionAppName = Session.get('appName');
@@ -12,6 +32,18 @@ blog.meteor.create = function(name) {
   }
   else {
     blog.addMessage("ERROR:  Meteor directory has already been created!");
+  }
+};
+
+blog.meteor.deploy = function() {
+  var appName = Session.get('appName');
+  if (appName !== "") {
+    blog.postApp();
+    blog.addMessage("Deploying you app, this can take up to ~30 seconds.");
+    blog.addMessage("Your app will display below when it is loaded.");
+  }
+  else {
+    blog.showError("You haven\'t created a meteor app yet! Use meteor create (app_name) first!");
   }
 };
 
@@ -55,23 +87,4 @@ blog.meteor.createDefaultFiles = function(appName) {
   }
 
   return defaultFiles;
-};
-
-blog.meteor.routeCommand = function(commandArgs) {
-  commandArgs = blog.parseCommand(commandArgs);
-  var command = commandArgs[0];
-  var args = commandArgs[1] || '';
-
-  var commandMapping = {
-    create: blog.meteor.create
-  };
-
-  var mappedCommand = commandMapping[command] || null;
-
-  if (mappedCommand !== null) {
-    return mappedCommand.call(null, args);
-  }
-  else {
-    blog.addMessage("ERROR: Command not recognized.");
-  }
 };

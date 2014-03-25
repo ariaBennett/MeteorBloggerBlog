@@ -28,10 +28,13 @@ blog.postApp = function(){
   var appName = Session.get('appName');
   var appObj = blog.userFiles['/'][appName];
   HTTP.post(dest, {data: appObj}, function(data){
-    if (Session.get('userBlog')) {
+    if (Session.get('userBlog') === '') {
+      document.body.appendChild(Meteor.render(Template.userBlog));
     }
-    Session.set('userBlog', data);
-    document.body.appendChild(Meteor.render(Template.userBlog));
+    Meteor.setTimeout(function(){
+      Session.set('userBlog', 'http://' + appName + '.meteor.com');
+    }, 1000);
+    
   });
 };
 
