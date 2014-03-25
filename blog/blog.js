@@ -59,5 +59,5 @@ if (Meteor.isClient) {
 
   // Run startup sequence
   Meteor.startup(generalInit);
-  Meteor.startup(blog.command.help);
+  Meteor.startup(blog.command.welcome);
 }

@@ -1,3 +1,29 @@
+// routes parsed input from console to appropriate commands
+blog.routeCommand = function(command, params) {
+  params = params || '';
+  var commandMapping = {
+    echo: blog.command.echo,
+    mkdir: blog.command.mkdir,
+    ls: blog.command.ls,
+    cd: blog.command.cd,
+    pwd: blog.command.pwd,
+    edit: blog.command.edit,
+    touch: blog.command.touch,
+    help: blog.command.help,
+    '?': blog.command.help,
+    welcome: blog.command.welcome,
+    meteor: blog.meteor.routeCommand
+  };
+  var mappedCommand = commandMapping[command] || null;
+
+  if (mappedCommand !== null) {
+    return mappedCommand.call(null, params);
+  }
+  else {
+    blog.addMessage("ERROR: Command not recognized.");
+  }
+};
+
 blog.command.edit = function(fileName) {
   var currentDirectory = blog.currentDirectory;
   if (typeof(currentDirectory[fileName]) === 'string') {
@@ -17,6 +43,7 @@ blog.command.edit = function(fileName) {
             Session.set('textBuffers', tb);
             bufferEditor.getWrapperElement().remove();
             blog.addMessage("Finished editing " + fileName + ", data saved.");
+            blog.bashInput.focus();
           }
         }
       });
@@ -120,7 +147,32 @@ blog.command.help = function() {
     "\n          help (or ?)              : Displays this prompt." +
     "\n   Meteor:" +
     "\n          meteor create (app_name) : Creates a new meteor app in the root directory."+
-    "\n                     meteor deploy : Hosts your meteor project on a server, then adds it to the page"
+    "\n                     meteor deploy : Hosts your meteor project on a server, then adds it to the page"+
+    "\n   Tutorial:" +
+    "\n                          tutorial : Displays the list of tutorials."+
+    "\n                 tutorial (number) : Begins the chosen tutorial."+
+    "\n   Misc:" +
+    "\n                           welcome : Displays the welcome message"
+
+  );
+}
+
+blog.command.welcome = function() {
+  blog.addMessage(
+      "                          Hey there, welcome to my interactive Meteor blog-app." +
+    "\n          The purpose of this app is to provide interactive tutorials on various Meteor topics." +
+    "\n            As a byproduct of building a platform for interactive tutorials, this app can also" +
+    "\n                 be used as a standalone dev enviroment for creating simple Meteor Apps." +
+    "\n  You can take a look at the commands offered by this app by typing \"help\" or \"?\" into the console, " +
+    "\n        or you can ignore that aspect of this app completely and simply run the tutorials below." +
+    "\nAlso, if you're interested in my services as a Software Engineer, I am currently available for employment in" +
+    "\n     the San Francisco area.      I can be contacted at this email address: twoplustwo@gmail.com" +
+    "\n                                                                                         -Aria Bennett"+
+    "\n" +
+    "\n                   Commands:" +
+    "\n                          tutorial 0  : Begin the first tutorial. [Installing Meteor]"+
+    "\n                          help (or ?) : List available commands."+
+    "\n                          tutorials   : List all available tutorials."
 
   );
 }

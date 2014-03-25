@@ -1,28 +1,3 @@
-// Looksup a function to send a command to
-blog.routeCommand = function(command, params) {
-  params = params || '';
-  var commandMapping = {
-    echo: blog.command.echo,
-    mkdir: blog.command.mkdir,
-    ls: blog.command.ls,
-    cd: blog.command.cd,
-    pwd: blog.command.pwd,
-    edit: blog.command.edit,
-    touch: blog.command.touch,
-    help: blog.command.help,
-    '?': blog.command.help,
-    meteor: blog.meteor.routeCommand
-  };
-  var mappedCommand = commandMapping[command] || null;
-
-  if (mappedCommand !== null) {
-    return mappedCommand.call(null, params);
-  }
-  else {
-    blog.addMessage("ERROR: Command not recognized.");
-  }
-};
-
 blog.postApp = function(){
   var dest = blog.backendUrl + 'deploy';
   var appName = Session.get('appName');
