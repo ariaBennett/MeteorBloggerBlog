@@ -10,11 +10,13 @@ if (Meteor.isClient) {
 
     var setupSessions = function() {
       Session.setDefault('log', []);
+      Session.setDefault('commandHistory', []);
       Session.setDefault('appName', "");
       Session.setDefault('userBlog', "");
       Session.setDefault('userBlogStyle', "");
       Session.setDefault('textBuffers', {});
     };
+
     var createShell = function(target) {
       blog.bashInstructions = CodeMirror(target, {
         value: "test",

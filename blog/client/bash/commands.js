@@ -92,7 +92,9 @@ blog.command.echo = function(args) {
 
 blog.command.mkdir = function(dirName) {
   dirName = dirName.replace(/\W+/g, "_");
-  if (blog.currentDirectory[dirName] === undefined) {
+  if (dirName === '') {
+    blog.showError("Invalid directory name; not creating.");
+  } else if (blog.currentDirectory[dirName] === undefined) {
     blog.createDirectory(blog.currentDirectory, dirName);
     blog.addMessage(dirName + " successfully created.");
   }
@@ -131,6 +133,7 @@ blog.command.ls = function() {
   }
   pathContents = pathContents.sort().toString();
   pathContents = pathContents.replace(/,/g, '\n');
+  pathContents = pathContents === '' ? "Nothing to display; empty directory." : pathContents;
   blog.addMessage(pathContents);
 };
 
@@ -183,12 +186,12 @@ blog.command.help = function() {
 
 blog.command.welcome = function() {
   blog.addMessage(
-      "                          Hey there, welcome to my interactive Meteor blog-app." +
+      "                          Hey there, welcome to my interactive Meteor tutorial." +
     "\n          The purpose of this app is to provide interactive tutorials on various Meteor topics." +
-    "\n            As a byproduct of building a platform for interactive tutorials, this app can also" +
-    "\n                 be used as a standalone dev enviroment for creating simple Meteor Apps." +
-    "\n  You can take a look at the commands offered by this app by typing \"help\" or \"?\" into the console, " +
-    "\n        or you can ignore that aspect of this app completely and simply run the tutorials below." +
+    "\n            As a byproduct of building this app platform to be interactive, you can also" +
+    "\n                 use it as a standalone dev enviroment for creating simple Meteor Apps." +
+    "\n      Take a look at the commands offered by this app by typing \"help\" or \"?\" into this console, " +
+    "\n               or you can ignore that aspect completely and simply run the tutorials below." +
     "\nAlso, if you're interested in my services as a Software Engineer, I am currently available for employment in" +
     "\n     the San Francisco area.      I can be contacted at this email address: twoplustwo@gmail.com" +
     "\n                                                                                         -Aria Bennett"+
