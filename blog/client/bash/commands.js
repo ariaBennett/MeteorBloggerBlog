@@ -6,6 +6,7 @@ blog.routeCommand = function(command, params) {
     mkdir: blog.command.mkdir,
     ls: blog.command.ls,
     cd: blog.command.cd,
+    rm: blog.command.rm,
     pwd: blog.command.pwd,
     edit: blog.command.edit,
     touch: blog.command.touch,
@@ -21,6 +22,28 @@ blog.routeCommand = function(command, params) {
   }
   else {
     blog.addMessage("ERROR: Command not recognized.");
+  }
+};
+
+blog.command.rm = function(target) {
+  var targetData = blog.getElementData(target, blog.currentDirectory);
+  var targetType = blog.getType(targetData);
+  if (targetType === null) {
+    blog.showError("That file is not recognized")
+  } else if (target[0] === '.') {
+    blog.showError("You are not allowed to delete directory sub-data directly");
+  } else if (targetType === 'string') {
+    delete blog.currentDirectory[target];
+    blog.addMessage(target + " deleted.");
+  } else if (targetType === 'object') {
+    if (blog.isDirEmpty(targetData)) {
+      delete blog.currentDirectory[target];
+      blog.addMessage(target + " deleted.");
+    } else {
+      blog.showError("Target directory is not empty; not deleting.");
+    }
+  } else {
+    blog.showError("An unknown error has caused rm to fail.");
   }
 };
 
@@ -81,6 +104,7 @@ blog.command.mkdir = function(dirName) {
 blog.command.touch = function(fileName) {
   if (blog.currentDirectory[fileName] === undefined) {
     blog.currentDirectory[fileName] = '';
+    blog.addMessage(fileName + " created.");
   }
   else {
     blog.showError("A file/directory with the name " + fileName + " already exists!");
