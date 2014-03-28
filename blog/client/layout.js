@@ -1,0 +1,136 @@
+// class methods
+blog.layout.parseTarget = function(target) {
+  if (target !== 'visibleTemplate') {
+    target = target[0] === 'r' ? target : 'region' + target ;
+  }
+  return target;
+};
+
+UI.body.helpers({
+  visibleTemplate: function () {
+    var templateName = Session.get("visibleTemplate");
+    return Template[templateName] || null;
+  }
+});
+
+Handlebars.registerHelper('region0', function(){
+  var region = Session.get('region0');
+  return Template[region] || null;
+});
+
+Handlebars.registerHelper('region1', function(){
+  var region = Session.get('region1');
+  return Template[region] || null;
+});
+
+Handlebars.registerHelper('region2', function(){
+  var region = Session.get('region2');
+  return Template[region] || null;
+});
+
+Handlebars.registerHelper('region3', function(){
+  var region = Session.get('region3');
+  return Template[region] || null;
+});
+
+Handlebars.registerHelper('region4', function(){
+  var region = Session.get('region4');
+  return Template[region] || null;
+});
+
+Handlebars.registerHelper('region5', function(){
+  var region = Session.get('region5');
+  return Template[region] || null;
+});
+
+Handlebars.registerHelper('region6', function(){
+  var region = Session.get('region6');
+  return Template[region] || null;
+});
+
+Handlebars.registerHelper('region7', function(){
+  var region = Session.get('region7');
+  return Template[region] || null;
+});
+
+blog.layout.applyTemplate = function(template){
+  Session.set("visibleTemplate", template);
+};
+/*
+  template = blog.layout.templates[template];
+  blog.layout.set('layout', template); 
+  var regions = document.getElementsByClassName('region');
+  for (var i = 0; i < regions.length; i++) {
+    var region = regions[i];
+    var id = region.id;
+    var render = Meteor.render(function(){
+      return '<div>' + Session.get(id) + 'afjaiosjfioa' + '</div>';
+    });
+    region.appendChild(render);
+  }
+*/
+
+blog.layout.get = function(target) {
+  target = blog.layout.parseTarget(target);
+  return Session.get(target);
+};
+
+blog.layout.set = function(target, data) {
+  target = blog.layout.parseTarget(target);
+  Session.set(target, data);
+};
+
+/*
+// Templates
+blog.layout.templates = {};
+
+blog.layout.templates['4x4'] = (function(){
+  var container = document.createElement('div');
+  container.style.width = "100%";
+  container.style.height = "100%";
+
+    var row0 = document.createElement('div');
+    row0.style.width = "100%";
+    row0.style.height = "50%";
+    container.appendChild(row0);
+
+      var row0col0 = document.createElement('div');
+      row0col0.style.width = "50%";
+      row0col0.style.height = "100%";
+      row0col0.style.float= "left";
+      row0col0.className = 'region';
+      row0col0.id = 'region0';
+      row0.appendChild(row0col0);
+
+      var row0col1 = document.createElement('div');
+      row0col1.style.width = "50%";
+      row0col1.style.height = "100%";
+      row0col1.style.float= "left";
+      row0col1.className = 'region';
+      row0col1.id = 'region1';
+      row0.appendChild(row0col1);
+    
+    var row1 = document.createElement('div');
+    row1.style.width = "100%";
+    row1.style.height = "50%";
+    container.appendChild(row1);
+
+      var row1col0 = document.createElement('div');
+      row1col0.style.width = "50%";
+      row1col0.style.height = "100%";
+      row1col0.style.float= "left";
+      row1col0.className = 'region';
+      row1col0.id = 'region2';
+      row1.appendChild(row1col0);
+
+      var row1col1 = document.createElement('div');
+      row1col1.style.width = "50%";
+      row1col1.style.height = "100%";
+      row1col1.style.float= "left";
+      row1col1.className = 'region';
+      row1col1.id = 'region3';
+      row1.appendChild(row1col1);
+
+  return container.innerHTML;
+})();
+*/

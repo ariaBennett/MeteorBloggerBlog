@@ -8,15 +8,6 @@ if (Meteor.isClient) {
       Session.set(id, sessionArray);
     };
 
-    var setupSessions = function() {
-      Session.setDefault('log', []);
-      Session.setDefault('commandHistory', []);
-      Session.setDefault('appName', "");
-      Session.setDefault('userBlog', "");
-      Session.setDefault('userBlogStyle', "");
-      Session.setDefault('textBuffers', {});
-    };
-
     var createShell = function(target) {
       blog.bashInstructions = CodeMirror(target, {
         value: "test",
@@ -55,8 +46,11 @@ if (Meteor.isClient) {
         blog.bashInstructions.setCursor(blog.bashInstructions.lineCount());
       });
     }
-    setupSessions();
-    createShell(document.getElementById('console'));
+    var consoleDiv = document.createElement('div');
+    consoleDiv.id = 'console';
+    consoleDiv.style.width = "100%";
+    consoleDiv.style.height = "100%";
+    createShell(consoleDiv);
   };
 
   // Run startup sequence
