@@ -1,0 +1,59 @@
+<template name="shell">
+  <div id="consoleView" style='width: 100%; height: 100%; overflow: hidden;'>
+  </div>
+
+  <div id="consoleInput" style='width: 100%; height: auto; overflow: hidden;'>
+  </div>
+
+  <script>
+    var createShell = function(view, input) {
+
+      blog.bashInstructions = CodeMirror(view, {
+        mode:  "shell",
+        theme: "3024-night",
+        lineWrapping: true,
+        readOnly: "nocursor"
+      });
+      blog.bashInput = CodeMirror(input, {
+        mode:  "shell",
+        theme: "3024-night",
+        lineWrapping: true,
+        autofocus: true, 
+        extraKeys: {
+          "Enter": function() {
+            blog.handleInput(blog.bashInput.getValue());
+            blog.bashInput.setValue("");
+          }
+        }
+      });
+
+      // Style the shells
+
+      var inputWrapper = blog.bashInput.getWrapperElement();
+      var instructionsWrapper = blog.bashInstructions.getWrapperElement();
+      instructionsWrapper.onclick = function(){
+        blog.bashInput.focus();
+      };
+      blog.bashInstructions.setSize('100%', '100%');
+      blog.bashInput.setSize('auto', '100%');
+
+      // Setup Deps events
+
+      // Events to run when log is updated
+      Deps.autorun(function(){
+        var log = Session.get('log');
+        var lastCommand = log[log.length - 1];
+
+        //blog.parseCommand(lastCommand);
+        blog.convertMessages(log, blog.bashInstructions);
+        blog.bashInstructions.setCursor(blog.bashInstructions.lineCount());
+      });
+    }
+    var consoleView = document.getElementById('consoleView');
+    var consoleInput = document.getElementById('consoleInput');
+    createShell(consoleView, consoleInput);
+  </script>
+</template>
+
+<template name="deployedApp">
+</template>

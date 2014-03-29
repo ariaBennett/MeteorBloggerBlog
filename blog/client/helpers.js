@@ -1,3 +1,9 @@
+blog.consoleFiller = function() {
+  for (var i = 0; i < 60; i++) {
+    blog.addMessage('\n');
+  }
+};
+
 blog.getPathObject = function(path) {
   if (typeof(path) === 'string') {
     return blog.getObjectFromPath(path);
