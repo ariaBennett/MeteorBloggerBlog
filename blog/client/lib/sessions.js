@@ -1,8 +1,8 @@
 Session.setDefault('log', []);
 Session.setDefault('commandHistory', []);
 Session.setDefault('appName', "");
-Session.setDefault('userBlog', "");
-Session.setDefault('userBlogStyle', "");
+Session.setDefault('userApp', "");
+Session.setDefault('userAppStyle', "");
 Session.setDefault('textBuffers', {});
 Session.setDefault('tutorial', {});
 

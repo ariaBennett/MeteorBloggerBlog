@@ -14,4 +14,10 @@ if (Meteor.isClient) {
   Meteor.startup(generalInit);
   Meteor.startup(blog.consoleFiller);
   Meteor.startup(blog.command.welcome);
+
+  Meteor.startup(function(){
+    blog.layout.applyTemplate('2x1');
+    Session.set('region0', 'userApp');
+    Session.set('region1', 'console');
+  });
 }

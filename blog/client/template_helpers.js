@@ -1,7 +1,7 @@
-Template.userBlog.url = function(){
-  return Session.get('userBlog');
+Template.userApp.url = function(){
+  return Session.get('userAppStyle');
 };
 
-Template.userBlog.style = function(){
-  return Session.get('userBlogStyle');
+Template.userApp.style = function(){
+  return Session.get('userAppStyle');
 };

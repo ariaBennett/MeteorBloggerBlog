@@ -8,6 +8,28 @@
   </div>
 </template>
 
+<template name="1x2">
+  <div style="width: 100%; height: 100%;">
+    <div style="width: 50%; height: 100%; float: left;">     
+      {{> region0}}
+    </div>
+    <div style="width: 50%; height: 100%; float: left;">     
+      {{> region1}}
+    </div>
+  </div>
+</template>
+
+<template name="2x1">
+  <div style="width: 100%; height: 100%;">
+    <div style="width: 100%; height: 50%; float: left;">     
+      {{> region0}}
+    </div>
+    <div style="width: 100%; height: 50%; float: left;">     
+      {{> region1}}
+    </div>
+  </div>
+</template>
+
 <template name="2x2">
   <div style="width: 100%; height: 100%;">
     <div style="width: 100%; height: 50%;">     
@@ -24,6 +46,33 @@
       </div>
       <div style="width: 50%; height: 100%; float: left;">     
         {{> region3}}
+      </div>
+    </div>
+  </div>
+</template>
+
+<template name="2x3">
+  <div style="width: 100%; height: 100%;">
+    <div style="width: 100%; height: 50%;">     
+      <div style="width: 33.3333333%; height: 100%; float: left;">     
+        {{> region0}}
+      </div>
+      <div style="width: 33.3333333%; height: 100%; float: left;">     
+        {{> region1}}
+      </div>
+      <div style="width: 33.3333333%; height: 100%; float: left;">     
+        {{> region2}}
+      </div>
+    </div>
+    <div style="width: 100%; height: 50%;">     
+      <div style="width: 33.3333333%; height: 100%; float: left;">     
+        {{> region3}}
+      </div>
+      <div style="width: 33.3333333%; height: 100%; float: left;">     
+        {{> region4}}
+      </div>
+      <div style="width: 33.3333333%; height: 100%; float: left;">     
+        {{> region5}}
       </div>
     </div>
   </div>

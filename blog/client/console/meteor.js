@@ -40,7 +40,7 @@ blog.meteor.deploy = function() {
   if (appName !== "") {
     blog.postApp();
     blog.addMessage("Deploying your app, this can take up to ~30 seconds.");
-    blog.addMessage("Your app will display below when it is loaded.");
+    blog.addMessage("Your app will display when it is loaded.");
   }
   else {
     blog.showError("You haven\'t created a meteor app yet! Use meteor create (app_name) first!");
